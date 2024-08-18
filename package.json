@@ -19,7 +19,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "styled-components": "^6.1.12",
-    "tss-react": "^4.9.4"
+    "tss-react": "^4.9.12"
   },
   "devDependencies": {
     "@types/react": "^18.2.56",
