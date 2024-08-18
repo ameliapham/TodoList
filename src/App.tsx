@@ -1,3 +1,17 @@
+import { TodoList } from "./TodoList"
+import { GlobalStyles } from "@mui/material"
+
+
 export function App() {
-  return <h1>Hello World</h1>
+  return (
+    <div>
+      <GlobalStyles styles={{
+          "*": {
+          "margin": 0,
+          "padding": 0,
+        },
+        }}/>
+        <TodoList />
+    </div>
+  )
 }
