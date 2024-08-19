@@ -1,22 +1,29 @@
 import { Input } from "@mui/material"
 import Button from "@mui/material/Button"
+import { useState } from "react"
 
 type Props = {
     className?: string,
-    text: string,
+    onAddTodo: (params: {text: string}) => void
+
 }
 
 export function AddTodo(props: Props) {
-    const { text, className } = props
-
+    const { className, onAddTodo } = props
+    const [inputValue, setInputValue] = useState("")
     return (
         <div className={className}>
             <Input
                 type="text"
-                //value={ }
-                //onChange={ }
+                value={inputValue}
+                onChange={e => e.target.value}
             />
-            <Button>Add</Button>
+            <Button
+                onClick={()=> {
+                    setInputValue("")
+                    onAddTodo({text: inputValue})
+                }}
+            >Add</Button>
         </div>
     )
 }

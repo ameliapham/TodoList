@@ -23,6 +23,7 @@ export function TodoList(props: Props) {
             </Typography>
             <AddTodo
                 className={classes.addTodo}
+                onAddTodo={({text}) => addTodo({text})}
             />
         </div>
     )
