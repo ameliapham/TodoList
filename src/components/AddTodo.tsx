@@ -16,7 +16,7 @@ export function AddTodo(props: Props) {
             <Input
                 type="text"
                 value={inputValue}
-                onChange={e => e.target.value}
+                onChange={e => setInputValue(e.target.value)}
             />
             <Button
                 onClick={()=> {
