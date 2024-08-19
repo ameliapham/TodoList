@@ -1,17 +1,32 @@
-import { initialTodos } from "./data";
+import { initialTodos, TodoData } from "./data";
 import { tss } from "tss-react/mui"
 import { Typography } from "@mui/material";
 import { AddTodo } from "./components/AddTodo";
+import { useState } from "react";
 
 
-type Props = {
-    className?: string
-}
 
-export function TodoList(props: Props) {
+export function TodoList() {
 
-    const { className } = props
     const { classes } = useStyles()
+
+    const [todos, setTodos] = useState(initialTodos)
+
+    function addTodo(params: { text: string }) {
+        const { text } = params
+
+        const newTodo: TodoData = {
+            id: Math.random(),
+            text: text,
+            done: false,
+        }
+        const newTodos: TodoData[] = [
+            ...initialTodos,
+            newTodo,
+        ]
+
+        setTodos(newTodos)
+    }
 
     return (
         <div className={classes.root}>
@@ -19,11 +34,11 @@ export function TodoList(props: Props) {
                 variant="h3"
                 className={classes.title}
             >
-                Todo List 
+                Todo List
             </Typography>
             <AddTodo
                 className={classes.addTodo}
-                onAddTodo={({text}) => addTodo({text})}
+                onAddTodo={({ text }) => addTodo({ text })}
             />
         </div>
     )
@@ -36,7 +51,7 @@ const useStyles = tss.create({
         "display": "flex",
         "flexDirection": "column",
         "justifyContent": "center",
-        
+
     },
     "title": {
         "display": "flex",
