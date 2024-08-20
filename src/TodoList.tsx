@@ -3,6 +3,7 @@ import { tss } from "tss-react/mui"
 import { Typography } from "@mui/material";
 import { AddTodo } from "./components/AddTodo";
 import { useState } from "react";
+import { Todo } from "./components/Todo";
 
 
 
@@ -40,6 +41,14 @@ export function TodoList() {
                 className={classes.addTodo}
                 onAddTodo={({ text }) => addTodo({ text })}
             />
+            <ul>
+                {todos.map(todo => (
+                    <Todo
+                        key={todo.id}
+                        text={todo.text}
+                    ></Todo>
+                ))}
+            </ul>
         </div>
     )
 }
