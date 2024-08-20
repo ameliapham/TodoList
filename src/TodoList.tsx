@@ -22,7 +22,7 @@ export function TodoList() {
             done: false,
         }
         const newTodos: TodoData[] = [
-            ...initialTodos,
+            ...todos,
             newTodo,
         ]
 

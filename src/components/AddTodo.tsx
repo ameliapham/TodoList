@@ -1,4 +1,4 @@
-import { Input } from "@mui/material"
+import Input from "@mui/material/Input"
 import Button from "@mui/material/Button"
 import { useState } from "react"
 
