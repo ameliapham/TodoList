@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { initialTodos } from "./data";
 import { tss } from "tss-react/mui"
 import { Typography } from "@mui/material";
 import { AddTodo } from "./components/AddTodo";
 import { Todo } from "./components/Todo";
 import { useTodos } from "./hooks/useTodos";
-
-
+import Button from "@mui/material/Button";
+import { useOidc } from "./oidc";
 
 export function TodoList() {
 
@@ -13,12 +14,14 @@ export function TodoList() {
 
     const { todos, addTodo, changeTextTodo, checkTodo, deleteTodo } = useTodos(initialTodos)
 
+    const { oidcTokens, logout } = useOidc();
+
     return (
         <div className={classes.root}>
             <Typography
                 variant="h4"
             >
-                Todo List
+                {oidcTokens.decodedIdToken.name}'s Todo List
             </Typography>
             <AddTodo
                 onAddTodo={({ text }) => addTodo({ text })}
@@ -37,6 +40,14 @@ export function TodoList() {
                     ></Todo>
                 ))}
             </ul>
+            <Button
+                onClick={() => logout({
+                    "redirectTo": "home",
+                })}
+            >
+                Log out
+            </Button>
+
         </div>
     )
 }
