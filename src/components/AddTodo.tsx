@@ -1,5 +1,6 @@
 import TextField from '@mui/material/TextField'
 import Button from "@mui/material/Button"
+import AddRoundedIcon from '@mui/icons-material/AddRounded'
 import { useState } from "react"
 import { tss } from "tss-react/mui"
 
@@ -32,7 +33,9 @@ export function AddTodo(props: Props) {
                     setInputValue("")
                     onAddTodo({ text: inputValue })
                 }}
-            >Add</Button>
+            >
+                <AddRoundedIcon/>Add
+            </Button>
         </div>
     )
 }
@@ -45,6 +48,6 @@ const useStyles = tss.create({
         "margin": "20px 0 50px 0"
     },
     "textField": {
-        "flex" : "1"
+        "flex": "1"
     }
 })

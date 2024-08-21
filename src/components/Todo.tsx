@@ -2,6 +2,9 @@ import Input from "@mui/material/Input"
 import { Typography } from "@mui/material"
 import Checkbox from '@mui/material/Checkbox'
 import Button from "@mui/material/Button"
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
+import DoneOutlineRoundedIcon from '@mui/icons-material/DoneOutlineRounded'
 import { useState } from "react"
 import { tss } from "tss-react/mui"
 
@@ -53,13 +56,14 @@ export function Todo(props: Props) {
                         }
                     }}
                 >
-                    {isEditing ? "Validate" : "Edit"}
+                    {isEditing ? <DoneOutlineRoundedIcon /> : <EditOutlinedIcon />}
                 </Button>
                 <Button
+                    className={classes.deleteButton}
                     variant='contained'
                     onClick={() => onDelete()}
                 >
-                    Delete
+                    <DeleteForeverOutlinedIcon />
                 </Button>
             </div>
         </li>
@@ -89,5 +93,8 @@ const useStyles = tss.create({
         "width": "100%",
         "display": "flex",
         "alignItems": "center"
+    },
+    "deleteButton": {
+        "backgroundColor": "#bf0603"
     },
 })
