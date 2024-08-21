@@ -96,6 +96,9 @@ export function TodoList() {
 
 const useStyles = tss.create({
     "root": {
+        "backgroundColor": "#fad2e1",
+        "padding": "50px",
+        "borderRadius": "15px",
         "width": "60vw",
         "display": "flex",
         "flexDirection": "column",

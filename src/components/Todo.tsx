@@ -74,7 +74,7 @@ const useStyles = tss.create({
     "root": {
         "width": "100%",
         "height": "auto",
-        "gap": "10px",
+        "gap": "20px",
         "display": "flex",
         "justifyContent": "space-between",
         "margin": "0 0 10px 0"
