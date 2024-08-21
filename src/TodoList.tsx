@@ -68,6 +68,24 @@ export function TodoList() {
 
     }
 
+    function checkTodo(params: {id: number, done: boolean}){
+        const {id, done} = params
+
+        const newTodos : TodoData[] = []
+
+        for (let i=0; i<todos.length; i++) {
+            const newTodo: TodoData = {
+                id: todos[i].id,
+                text: todos[i].text,
+                done: todos[i].id === id? done : todos[i].done
+            }
+
+            newTodos.push(newTodo)
+        }
+
+        setTodos(newTodos)
+    }
+
     return (
         <div className={classes.root}>
             <Typography
@@ -85,8 +103,10 @@ export function TodoList() {
                     <Todo
                         key={todo.id}
                         text={todo.text}
+                        done={todo.done}
                         onDelete={() => deleteTodo({ id: todo.id })}
                         onTextChange={({ text }) => changeTextTodo({ id: todo.id, text })}
+                        onDoneChange={({done}) => checkTodo({id: todo.id, done})}
                     ></Todo>
                 ))}
             </ul>

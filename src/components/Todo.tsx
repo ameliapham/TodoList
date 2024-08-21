@@ -11,13 +11,15 @@ import { tss } from "tss-react/mui"
 export type Props = {
     className?: string,
     text: string,
+    done: boolean
     onDelete: () => void
     onTextChange: (params: { text: string }) => void
+    onDoneChange: (params: {done: boolean}) => void
 }
 
 
 export function Todo(props: Props) {
-    const { className, text, onDelete, onTextChange } = props
+    const { className, text, done, onDelete, onTextChange, onDoneChange } = props
 
     const { cx, classes } = useStyles()
 
@@ -28,7 +30,10 @@ export function Todo(props: Props) {
     return (
         <li className={cx(className, classes.root)}>
             <div className={classes.textZone}>
-                <Checkbox />
+                <Checkbox 
+                    checked={done}
+                    onChange={e => onDoneChange({done: e.target.checked})}
+                />
 
                 {isEditing ?
                     <Input
