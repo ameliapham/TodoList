@@ -29,6 +29,27 @@ export function TodoList() {
         setTodos(newTodos)
     }
 
+    function deleteTodo(params: {id: number}){
+        const { id } = params
+
+        const newTodos: TodoData[]=[]
+
+        for (let i=0; i<todos.length; i++){
+
+            const newTodo: TodoData = {
+                id : todos[i].id,
+                text : todos[i].text,
+                done : todos[i].done
+            }
+
+            if (todos[i].id !== id) {
+                newTodos.push(newTodo)
+            }
+        }
+        
+        setTodos(newTodos)
+    }
+
     return (
         <div className={classes.root}>
             <Typography
@@ -46,6 +67,7 @@ export function TodoList() {
                     <Todo
                         key={todo.id}
                         text={todo.text}
+                        onDelete={() => deleteTodo({id: todo.id})}
                     ></Todo>
                 ))}
             </ul>

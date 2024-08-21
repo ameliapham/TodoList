@@ -4,11 +4,12 @@ import Button from "@mui/material/Button"
 export type Props = {
     className?: string,
     text: string,
+    onDelete: () => void
 }
 
 
 export function Todo(props: Props) {
-    const {className, text} = props
+    const { className, text, onDelete } = props
 
     return (
         <li className={className}>
@@ -16,8 +17,14 @@ export function Todo(props: Props) {
                 type="checkbox"
             />
             <span>{text}</span>
-            <Button>Edit</Button>
-            <Button>Delete</Button>
+            <Button>
+                Edit
+            </Button>
+            <Button
+                onClick={() => onDelete()}
+            >
+                Delete
+            </Button>
         </li>
     )
 }
