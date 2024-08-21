@@ -19,6 +19,7 @@ export function AddTodo(props: Props) {
                 onChange={e => setInputValue(e.target.value)}
             />
             <Button
+                disabled={inputValue === ""}
                 onClick={()=> {
                     setInputValue("")
                     onAddTodo({text: inputValue})
