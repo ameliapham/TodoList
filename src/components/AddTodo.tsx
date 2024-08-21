@@ -40,7 +40,6 @@ export function AddTodo(props: Props) {
 const useStyles = tss.create({
     "root": {
         "width": "100%",
-        "border": "1px solid red",
         "display": "flex",
         "gap": "20px",
         "margin": "20px 0 50px 0"

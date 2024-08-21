@@ -29,17 +29,17 @@ export function TodoList() {
         setTodos(newTodos)
     }
 
-    function deleteTodo(params: {id: number}){
+    function deleteTodo(params: { id: number }) {
         const { id } = params
 
-        const newTodos: TodoData[]=[]
+        const newTodos: TodoData[] = []
 
-        for (let i=0; i<todos.length; i++){
+        for (let i = 0; i < todos.length; i++) {
 
             const newTodo: TodoData = {
-                id : todos[i].id,
-                text : todos[i].text,
-                done : todos[i].done
+                id: todos[i].id,
+                text: todos[i].text,
+                done: todos[i].done
             }
 
             if (todos[i].id !== id) {
@@ -50,16 +50,16 @@ export function TodoList() {
         setTodos(newTodos)
     }
 
-    function changeTextTodo(params: {id: number, text: string}) {
+    function changeTextTodo(params: { id: number, text: string }) {
         const { id, text } = params
-        
+
         const newTodos: TodoData[] = []
 
-        for (let i=0; i<todos.length; i++){
+        for (let i = 0; i < todos.length; i++) {
             const newTodo: TodoData = {
-                id : todos[i].id,
-                text : todos[i].id === id? text : todos[i].text,
-                done : todos[i].done
+                id: todos[i].id,
+                text: todos[i].id === id ? text : todos[i].text,
+                done: todos[i].done
             }
             newTodos.push(newTodo)
         }
@@ -71,22 +71,22 @@ export function TodoList() {
     return (
         <div className={classes.root}>
             <Typography
-                variant="h3"
-                className={classes.title}
+                variant="h4"
             >
                 Todo List
             </Typography>
             <AddTodo
-                className={classes.addTodo}
                 onAddTodo={({ text }) => addTodo({ text })}
             />
-            <ul>
+            <ul
+            //className={classes.listTodo}
+            >
                 {todos.map(todo => (
                     <Todo
                         key={todo.id}
                         text={todo.text}
-                        onDelete={() => deleteTodo({id: todo.id})}
-                        onTextChange={({text}) => changeTextTodo({id: todo.id, text})}
+                        onDelete={() => deleteTodo({ id: todo.id })}
+                        onTextChange={({ text }) => changeTextTodo({ id: todo.id, text })}
                     ></Todo>
                 ))}
             </ul>
@@ -96,20 +96,12 @@ export function TodoList() {
 
 const useStyles = tss.create({
     "root": {
-        "height": "100vh",
-        "border": "1px solid red",
+        "width": "60vw",
         "display": "flex",
         "flexDirection": "column",
-        "justifyContent": "center",
-
+        "position": "absolute",
+        "top": "10%",
+        "left": "50%",
+        "transform": "translate(-50%)",
     },
-    "title": {
-        "display": "flex",
-        "justifyContent": "center",
-    },
-    "addTodo": {
-        "display": "flex",
-        "justifyContent": "center"
-    }
-
 })
