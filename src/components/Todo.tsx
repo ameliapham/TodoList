@@ -15,6 +15,8 @@ export function Todo(props: Props) {
 
     const [isEditing, setIsEditing] = useState(false)
 
+    const [inputValue, setInputValue] = useState(text)
+
     return (
         <li className={className}>
             <Input
@@ -22,21 +24,23 @@ export function Todo(props: Props) {
             />
             {   isEditing ? 
                 <Input
-                    type="text"    
+                    type="text"
+                    value={inputValue}
+                    onChange={e => setInputValue(e.target.value)}
                 /> : 
                 <span>{text}</span>
             }
             <Button
                 onClick={() => {
                     if (isEditing){
-                        onTextChange({text})
+                        onTextChange({text: inputValue})
                         setIsEditing(false)
                     } else {
                         setIsEditing(true)
                     }
                 }}
             >
-                Edit
+                {isEditing? "Validate" : "Edit"}
             </Button>
             <Button
                 onClick={() => onDelete()}
