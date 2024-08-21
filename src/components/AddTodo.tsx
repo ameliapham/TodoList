@@ -26,6 +26,7 @@ export function AddTodo(props: Props) {
                 size="small"
             />
             <Button
+                variant='contained'
                 disabled={inputValue === ""}
                 onClick={() => {
                     setInputValue("")
