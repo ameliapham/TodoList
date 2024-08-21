@@ -46,8 +46,26 @@ export function TodoList() {
                 newTodos.push(newTodo)
             }
         }
-        
+
         setTodos(newTodos)
+    }
+
+    function changeTextTodo(params: {id: number, text: string}) {
+        const { id, text } = params
+        
+        const newTodos: TodoData[] = []
+
+        for (let i=0; i<todos.length; i++){
+            const newTodo: TodoData = {
+                id : todos[i].id,
+                text : todos[i].id === id? text : todos[i].text,
+                done : todos[i].done
+            }
+            newTodos.push(newTodo)
+        }
+
+        setTodos(newTodos)
+
     }
 
     return (
@@ -68,6 +86,7 @@ export function TodoList() {
                         key={todo.id}
                         text={todo.text}
                         onDelete={() => deleteTodo({id: todo.id})}
+                        onTextChange={({text}) => changeTextTodo({id: todo.id, text})}
                     ></Todo>
                 ))}
             </ul>
