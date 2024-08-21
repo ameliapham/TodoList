@@ -34,7 +34,7 @@ export function AddTodo(props: Props) {
                     onAddTodo({ text: inputValue })
                 }}
             >
-                <AddRoundedIcon/>Add
+                <AddRoundedIcon />Add
             </Button>
         </div>
     )
@@ -48,6 +48,6 @@ const useStyles = tss.create({
         "margin": "20px 0 50px 0"
     },
     "textField": {
-        "flex": "1"
+        "flex": 1
     }
 })
