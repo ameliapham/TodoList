@@ -1,9 +1,11 @@
-import { initialTodos } from "./data";
+import { initialTodos } from "./data"
 import { tss } from "tss-react/mui"
-import { Typography } from "@mui/material";
-import { AddTodo } from "./components/AddTodo";
-import { Todo } from "./components/Todo";
-import { useTodos } from "./hooks/useTodos";
+import { Typography } from "@mui/material"
+import { AddTodo } from "./components/AddTodo"
+import { Todo } from "./components/Todo"
+import { useTodos } from "./hooks/useTodos"
+import { declareComponentKeys } from "i18nifty"
+import { useTranslation } from "./i18n"
 
 
 
@@ -11,14 +13,16 @@ export function TodoList() {
 
     const { classes } = useStyles()
 
-    const {todos, addTodo, changeTextTodo, checkTodo, deleteTodo} = useTodos(initialTodos)
-    
+    const { todos, addTodo, changeTextTodo, checkTodo, deleteTodo } = useTodos(initialTodos)
+
+    const { t } = useTranslation({TodoList})
+
     return (
         <div className={classes.root}>
             <Typography
                 variant="h4"
             >
-                Todo List
+                {t("Todo List")}
             </Typography>
             <AddTodo
                 onAddTodo={({ text }) => addTodo({ text })}
@@ -33,7 +37,7 @@ export function TodoList() {
                         done={todo.done}
                         onDelete={() => deleteTodo({ id: todo.id })}
                         onTextChange={({ text }) => changeTextTodo({ id: todo.id, text })}
-                        onDoneChange={({done}) => checkTodo({id: todo.id, done})}
+                        onDoneChange={({ done }) => checkTodo({ id: todo.id, done })}
                     ></Todo>
                 ))}
             </ul>
@@ -55,3 +59,7 @@ const useStyles = tss.create({
         "transform": "translate(-50%)",
     },
 })
+
+export const { i18n } = declareComponentKeys<
+    | "Todo List"
+>()({ TodoList })
