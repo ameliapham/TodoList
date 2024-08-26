@@ -5,7 +5,7 @@ import { AddTodo } from "./components/AddTodo"
 import { Todo } from "./components/Todo"
 import { useTodos } from "./hooks/useTodos"
 import { declareComponentKeys } from "i18nifty"
-import { useTranslation } from "./i18n"
+import { useTranslation } from "./i18n/i18n"
 
 
 
