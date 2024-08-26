@@ -29,7 +29,7 @@ export const {
     {
         "en": {
             "TodoList": {
-                "Todo List": "Title of application",
+                "Todo List": "Todo List",
             }
         },
         /* spell-check: disable */
