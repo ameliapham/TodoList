@@ -1,7 +1,7 @@
 import type { Translations } from '../types';
 
 export const translations: Translations<"en"> = {
-    "TodoList": {
+    "Connection": {
         "Todo List": "Todo List",
     }
 };
