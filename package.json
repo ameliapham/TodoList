@@ -15,11 +15,15 @@
     "@mui/icons-material": "^5.15.12",
     "@mui/material": "^5.16.7",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
+    "@tanstack/react-query": "^5.52.0",
+    "axios": "^1.7.4",
     "geist": "^1.2.2",
+    "oidc-spa": "^5.2.4",
     "i18nifty": "^3.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tss-react": "^4.9.12"
+    "tss-react": "^4.9.12",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/react": "^18.2.56",
