@@ -10,13 +10,13 @@ type Props = {
     className?: string;
 }
 
-export function Connection(props: Props) {
+export function Header(props: Props) {
     const { className } = props
     const { cx, classes } = useStyles()
 
-    const { t } = useTranslation({ Connection })
+    const { t } = useTranslation({ Header })
 
-    const { logout, login } = useOidc();
+    const { logout } = useOidc();
 
     return (
         <div className={cx(className, classes.root)}>
@@ -26,13 +26,15 @@ export function Connection(props: Props) {
                 {t("Todo list")}
             </Typography>
 
-            <Button
+
+            {/*<Button
                 onClick={() => login}
             >
                 {t("Log in")}
-            </Button>
+            </Button>*/}
 
             <Button
+                variant="outlined"
                 onClick={() => logout({
                     "redirectTo": "home"
                 })}
@@ -40,25 +42,22 @@ export function Connection(props: Props) {
                 {t("Log out")}
             </Button>
 
-
         </div>
     )
 }
 
 const useStyles = tss
-    .withName({ Connection })
+    .withName({ Header })
     .create({
         "root": {
             "display": "flex",
             "justifyContent": "space-between",
-            "padding": "10px 30px",
-            "border": "1px solid red"
         }
     })
 
 
 export const { i18n } = declareComponentKeys<
     | "Todo list"
-    | "Log in"
+    //| "Log in"
     | "Log out"
->()({ Connection })
+>()({ Header })
