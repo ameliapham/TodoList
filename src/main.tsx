@@ -13,5 +13,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <App />
       </QueryClientProvider>
     </OidcProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 )
