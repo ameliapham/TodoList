@@ -1,14 +1,11 @@
 //import { initialTodos } from "./data"
 import { tss } from "tss-react/mui"
-import { Typography } from "@mui/material"
 import { AddTodo } from "./components/AddTodo"
 import { Todo } from "./components/Todo"
 //import { useTodos } from "./hooks/useTodos"
 import { useTodosApi } from "./todos-api"
-import { declareComponentKeys } from "i18nifty"
-import { useTranslation } from "./i18n/i18n"
-import { useOidc } from "./oidc"
 import CircularProgress from '@mui/material/CircularProgress';
+import { Connection } from "./components/Connection"
 
 
 
@@ -18,10 +15,6 @@ export function TodoList() {
 
     const { todos, createTodo, updateTodo, isPending, deleteTodo } = useTodosApi()
 
-    const { oidcTokens } = useOidc();
-
-    const { t } = useTranslation({ TodoList })
-
     if (todos === undefined) {
         return <CircularProgress />
     }
@@ -30,11 +23,7 @@ export function TodoList() {
         <div className={classes.root}>
             {isPending && <CircularProgress />}
 
-            <Typography
-                variant="h4"
-            >
-                {oidcTokens.decodedIdToken.name}{t("Todo List")}
-            </Typography>
+            <Connection/>
 
             <AddTodo
                 onAddTodo={({ text }) => createTodo(text)}
@@ -73,7 +62,3 @@ const useStyles = tss
             "transform": "translate(-50%)",
         },
     })
-
-export const { i18n } = declareComponentKeys<
-    | "Todo List"
->()({ TodoList })
