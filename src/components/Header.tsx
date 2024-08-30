@@ -5,9 +5,9 @@ import { declareComponentKeys } from "i18nifty"
 import { useTranslation } from "../i18n"
 import { useOidc } from "../oidc"
 
-
 type Props = {
     className?: string;
+    isPending: boolean;
 }
 
 export function Header(props: Props) {
@@ -16,22 +16,15 @@ export function Header(props: Props) {
 
     const { t } = useTranslation({ Header })
 
-    const { logout } = useOidc();
+    const { logout, oidcTokens } = useOidc();
 
     return (
         <div className={cx(className, classes.root)}>
             <Typography
                 variant="h4"
             >
-                {t("Todo list")}
+                {t("owner Todo list", { ownerName: oidcTokens.decodedIdToken.name })}
             </Typography>
-
-
-            {/*<Button
-                onClick={() => login}
-            >
-                {t("Log in")}
-            </Button>*/}
 
             <Button
                 variant="outlined"
@@ -57,7 +50,7 @@ const useStyles = tss
 
 
 export const { i18n } = declareComponentKeys<
-    | "Todo list"
+    | { K: "owner Todo list"; P: { ownerName: string; } }
     //| "Log in"
     | "Log out"
 >()({ Header })

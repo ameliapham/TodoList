@@ -2,7 +2,7 @@ import type { Translations } from '../types';
 
 export const translations: Translations<"en"> = {
     "Header": {
-        "Todo list": "Todo List",
+        "owner Todo list": ({ ownerName })=> `${ownerName}'s Todo List`,
         //"Log in": "Log in",
         "Log out": "Log out"
     }
