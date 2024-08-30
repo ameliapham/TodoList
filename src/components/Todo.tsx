@@ -5,8 +5,9 @@ import Button from "@mui/material/Button"
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import DoneOutlineRoundedIcon from '@mui/icons-material/DoneOutlineRounded'
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { tss } from "tss-react/mui"
+import CircularProgress from '@mui/material/CircularProgress';
 
 export type Props = {
     className?: string,
@@ -14,12 +15,13 @@ export type Props = {
     done: boolean
     onDelete: () => void
     onTextChange: (params: { text: string }) => void
-    onDoneChange: (params: {done: boolean}) => void
+    onDoneChange: (params: { done: boolean }) => void
+    isPending: boolean;
 }
 
 
 export function Todo(props: Props) {
-    const { className, text, done, onDelete, onTextChange, onDoneChange } = props
+    const { className, text, done, onDelete, onTextChange, onDoneChange, isPending } = props
 
     const { cx, classes } = useStyles()
 
@@ -27,13 +29,45 @@ export function Todo(props: Props) {
 
     const [inputValue, setInputValue] = useState(text)
 
+    const [isCheckboxLoading, setIsCheckboxLoading] = useState(false)
+    const [isDeleteButtonLoading, setIsDeleteButtonLoading] = useState(false)
+    const [isEditButtonLoading, setIsEditButtonLoading] = useState(false)
+
+    useEffect(
+        () => {
+            if (!isPending) {
+                setIsCheckboxLoading(false)
+                setIsDeleteButtonLoading(false)
+                setIsEditButtonLoading(false)
+            }
+        },
+        [isPending]
+    );
+
     return (
         <li className={cx(className, classes.root)}>
             <div className={classes.textZone}>
-                <Checkbox 
-                    checked={done}
-                    onChange={e => onDoneChange({done: e.target.checked})}
-                />
+
+
+
+                {isCheckboxLoading ?
+                    <CircularProgress
+                        size={24}
+                        sx={{
+                            color: "#1876D1",
+                            padding: "10px"
+                        }} /> :
+                    <Checkbox
+                        checked={done}
+                        onChange={e => {
+                            setIsCheckboxLoading(true)
+                            onDoneChange({ done: e.target.checked })
+
+                        }}
+                    />
+                }
+
+
 
                 {isEditing ?
                     <Input
@@ -46,29 +80,68 @@ export function Todo(props: Props) {
                     <Typography
                         variant="body1"
                         className={classes.text}
-                    >{text}</Typography>
+                    >{isEditButtonLoading ? inputValue : text}</Typography>
                 }
             </div>
             <div className={classes.buttonZone}>
                 <Button
+                    disabled={isEditButtonLoading}
                     variant='outlined'
                     onClick={() => {
                         if (isEditing) {
                             onTextChange({ text: inputValue })
                             setIsEditing(false)
+                            setIsEditButtonLoading(true)
                         } else {
                             setIsEditing(true)
                         }
                     }}
                 >
-                    {isEditing ? <DoneOutlineRoundedIcon /> : <EditOutlinedIcon />}
+
+                    {isEditing ?
+                        <DoneOutlineRoundedIcon /> :
+
+                        isEditButtonLoading ?
+                            <CircularProgress
+                                size={24}
+                                sx={{
+                                    color: "#1876D1",
+                                    position: 'absolute',
+                                    top: '50%',
+                                    left: '50%',
+                                    marginTop: '-12px',
+                                    marginLeft: '-12px',
+                                }} /> :
+                            <EditOutlinedIcon />
+                    }
+
+
                 </Button>
+
                 <Button
+                    disabled={isDeleteButtonLoading}
                     className={classes.deleteButton}
                     variant='contained'
-                    onClick={() => onDelete()}
+                    onClick={() => {
+                        onDelete()
+                        setIsDeleteButtonLoading(true)
+                    }}
                 >
-                    <DeleteForeverOutlinedIcon />
+                    {isDeleteButtonLoading ?
+                        <CircularProgress
+                            size={24}
+                            sx={{
+                                color: "#1876D1",
+                                position: 'absolute',
+                                top: '50%',
+                                left: '50%',
+                                marginTop: '-12px',
+                                marginLeft: '-12px',
+                            }}
+                        /> :
+                        <DeleteForeverOutlinedIcon />
+                    }
+
                 </Button>
             </div>
         </li>
