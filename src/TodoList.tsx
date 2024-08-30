@@ -5,7 +5,7 @@ import { Todo } from "./components/Todo"
 //import { useTodos } from "./hooks/useTodos"
 import { useTodosApi } from "./todos-api"
 import CircularProgress from '@mui/material/CircularProgress';
-import { Connection } from "./components/Connection"
+import { Header } from "./components/Header"
 
 
 
@@ -13,7 +13,7 @@ export function TodoList() {
 
     const { classes } = useStyles()
 
-    const { todos, createTodo, updateTodo, isPending, deleteTodo } = useTodosApi()
+    const { todos, isPending, createTodo, updateTodo, deleteTodo } = useTodosApi()
 
     if (todos === undefined) {
         return <CircularProgress />
@@ -21,9 +21,10 @@ export function TodoList() {
 
     return (
         <div className={classes.root}>
-            {isPending && <CircularProgress />}
 
-            <Connection/>
+            <Header
+                isPending= {isPending}
+            />
 
             <AddTodo
                 onAddTodo={({ text }) => createTodo(text)}
@@ -35,6 +36,7 @@ export function TodoList() {
                         key={todo.id}
                         text={todo.text}
                         done={todo.isDone}
+                        isPending={isPending}
                         onDelete={() => deleteTodo(todo.id)}
                         onTextChange={({ text }) => updateTodo({ id: todo.id, text })}
                         onDoneChange={({ done }) => updateTodo({ id: todo.id, isDone: done })}
@@ -56,6 +58,7 @@ const useStyles = tss
             "width": "60vw",
             "display": "flex",
             "flexDirection": "column",
+            "gap": "20px",
             "position": "absolute",
             "top": "10%",
             "left": "50%",
